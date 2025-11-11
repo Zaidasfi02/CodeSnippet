@@ -9,7 +9,7 @@ export default function AddSnippet() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:2002/api/code", {
+    const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/code`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

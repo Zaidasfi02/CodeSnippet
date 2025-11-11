@@ -7,7 +7,7 @@ export default function MySnippets() {
   const password = localStorage.getItem("userPassword");
 
   const fetchSnippets = async () => {
-    const res = await fetch("http://localhost:2002/api/code/my", {
+    const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/code/my`, {
       headers: { Authorization: "Basic " + btoa(email + ":" + password) },
     });
     if (res.ok) {
@@ -19,7 +19,7 @@ export default function MySnippets() {
 
   const handleDelete = async (id) => {
     if (!window.confirm("Delete this snippet?")) return;
-    const res = await fetch(`http://localhost:2002/api/code/delete/${id}`, {
+    const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/code/delete/${id}`, {
       method: "DELETE",
       headers: { Authorization: "Basic " + btoa(email + ":" + password) },
     });

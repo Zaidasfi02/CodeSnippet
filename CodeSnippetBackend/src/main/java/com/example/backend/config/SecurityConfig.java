@@ -29,17 +29,19 @@ public class SecurityConfig {
         this.userRepository = userRepository;
     }
 
-    // ✅ Password encoder
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    //CORS configuration (for localhost:5173)
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:5173"));
+        config.setAllowedOrigins(List.of(
+                "http://localhost:5173",
+                "https://codesnippet-t27b.onrender.com",   
+                "https://your-frontend-url.onrender.com"    
+        ));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
@@ -49,7 +51,6 @@ public class SecurityConfig {
         return source;
     }
 
-    //Load user details from DB
     @Bean
     public UserDetailsService userDetailsService() {
         return email -> {
@@ -65,7 +66,6 @@ public class SecurityConfig {
         };
     }
 
-    //Auth provider (Spring uses this automatically)
     @Bean
     public DaoAuthenticationProvider authenticationProvider(
             UserDetailsService userDetailsService,
@@ -76,17 +76,15 @@ public class SecurityConfig {
         return provider;
     }
 
-    // ✅ Main security setup
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
-                .cors(withDefaults())  // ✅ enable our CORS config
-
+                .cors(withDefaults())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST, "/api/auth/signup").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
-                        .requestMatchers("/api/home/**", "/api/about/**").permitAll()
+                        .requestMatchers("/api/home/**", "/api/about/**", "/api/health").permitAll()
                         .requestMatchers("/api/code/**").authenticated()
                         .anyRequest().denyAll()
                 )
@@ -96,3 +94,4 @@ public class SecurityConfig {
         return http.build();
     }
 }
+
