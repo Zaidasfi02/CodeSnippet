@@ -15,7 +15,8 @@ import com.example.backend.service.UserService;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = { "https://codesnippetfrontend.onrender.com",
+						  "http://localhost:5173"})
 public class AuthController {
 
 	@Autowired

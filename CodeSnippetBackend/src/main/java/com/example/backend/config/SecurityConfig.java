@@ -40,7 +40,7 @@ public class SecurityConfig {
         config.setAllowedOrigins(List.of(
                 "http://localhost:5173",
                 "https://codesnippet-t27b.onrender.com",   
-                "https://your-frontend-url.onrender.com"    
+                "https://codesnippetfrontend.onrender.com"    
         ));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));

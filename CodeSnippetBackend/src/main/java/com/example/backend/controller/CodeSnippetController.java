@@ -22,7 +22,8 @@ import com.example.backend.service.CodeSnippetService;
 
 @RestController
 @RequestMapping("/api/code")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {"https://codesnippetfrontend.onrender.com",
+						"http://localhost:5173"})
 public class CodeSnippetController {
 
 	@Autowired
