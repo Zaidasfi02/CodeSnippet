@@ -1,0 +1,20 @@
+# Ignore Eclipse metadata
+.metadata/
+
+# Ignore node modules and build artifacts
+frontend/node_modules/
+frontend/.env
+frontend/dist/
+
+# Ignore Maven build files
+CodeSnippetBackend/target/
+CodeSnippetBackend/.mvn/
+CodeSnippetBackend/.settings/
+CodeSnippetBackend/.classpath
+CodeSnippetBackend/.project
+
+# Ignore logs
+*.log
+
+# Ignore environment files
+.env
